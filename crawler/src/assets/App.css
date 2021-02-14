@@ -1,0 +1,129 @@
+.app {
+    display: grid;
+    place-items: center;
+}
+
+.schedule {
+    display: flex;
+}
+
+.days {
+    display: flex;
+}
+
+.day,
+.hours {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    text-align: center;
+    background-color: rgb(243, 243, 243);
+    border: 1px solid rgb(214, 214, 214);
+}
+
+.day>*,
+.hour {
+    height: 10rem;
+    width: 15rem;
+    background-color: rgb(243, 243, 243);
+    border: 1px solid rgb(214, 214, 214);
+    overflow: auto;
+}
+
+.day__title,
+.hours__title {
+    height: 3rem;
+    background-color: rgb(243, 243, 243);
+    border: 1px solid rgb(214, 214, 214);
+    overflow: auto;
+    display: grid;
+    place-items: center;
+}
+
+::-webkit-scrollbar {
+    width: 0.75rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 15px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.day>*:nth-child(2n),
+.hour:nth-child(2n+1) {
+    background: rgb(214, 214, 214);
+    border: 1px solid rgb(175, 175, 175);
+}
+
+.courseGroup {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    padding: 1rem 0;
+}
+
+.course {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 80%;
+    padding: 1rem 0;
+    margin: 0 auto;
+    border-radius: 5px;
+    display: grid;
+    place-items: center;
+}
+
+.Seminar,
+.Laborator {
+    background-color: rgb(250, 153, 153);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.Curs {
+    background-color: rgb(153, 219, 250);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.hour {
+    display: grid;
+    place-items: center;
+}
+
+@media screen and (max-width: 1500px) {
+    .day>*,
+    .hour,
+    .day__title,
+    .hours__title {
+        height: 10rem;
+        width: 10rem;
+    }
+}
+
+
+@media screen and (max-width: 1000px) {
+    .day>*,
+    .hour,
+    .day__title,
+    .hours__title {
+        height: 10rem;
+        width: 20rem;
+    }
+
+    .days {
+        display: flex;
+        height: 71rem;
+        width: 20rem;
+        overflow: auto;
+    }
+
+    .day__title::before{
+        content: " ";
+    }
+
+    .day__title::after{
+        content: "(scroll left-right)";
+    }
+}
