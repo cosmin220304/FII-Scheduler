@@ -66,4 +66,9 @@ server.post('/courses', async (req, res) => {
     }
 });
 
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 server.listen(process.env.PORT || 8000, console.log('Server started at port 8000'));
