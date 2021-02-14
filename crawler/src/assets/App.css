@@ -54,7 +54,7 @@
 }
 
 .day>*:nth-child(2n),
-.hour:nth-child(2n+1) {
+.hour:nth-child(2n) {
     background: rgb(214, 214, 214);
     border: 1px solid rgb(175, 175, 175);
 }
@@ -78,12 +78,12 @@
 
 .Seminar,
 .Laborator {
-    background-color: rgb(250, 153, 153);
+    background-color: #d9534f;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .Curs {
-    background-color: rgb(153, 219, 250);
+    background-color: #5bc0de;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -115,8 +115,9 @@
     .days {
         display: flex;
         height: 71rem;
-        width: 20rem;
-        overflow: auto;
+        width: 25rem;
+        overflow-x: auto;
+        overflow-y: hidden;
     }
 
     .day__title::before{

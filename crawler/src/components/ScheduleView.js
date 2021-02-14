@@ -3,11 +3,10 @@ import { v4 as uuidv4 } from 'uuid'
 import UseSchedule from '../utils/UseSchedule'
 import DayView from './DayView'
 
-const ScheduleView = ({ group }) => {
-    const [isLoading, schedule] = UseSchedule({ group })
+const ScheduleView = ({ schedule }) => {
     const hours = ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00']
 
-    if (isLoading || !group) {
+    if (!schedule) {
         return null
     }
 

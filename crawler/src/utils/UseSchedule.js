@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 const axios = require('axios').default
 
-const UseSchedule = ({ group, settings }) => {
-    const [schedule, setSchedule] = useState({})
-    const [isLoading, setIsLoading] = useState(true)
+const UseSchedule = () => {
+    const [schedule, setSchedule] = useState()
 
-    const parseData = async (group) => {
+    const loadSchedule = async (group) => {
         if (!group) return []
 
         let newSchedule = {}
@@ -40,17 +39,7 @@ const UseSchedule = ({ group, settings }) => {
         setSchedule(finalSchedule)
     }
 
-    useEffect(() => {
-        parseData(group)
-    }, [group])
-
-    useEffect(() => {
-        if (schedule) {
-            setIsLoading(false)
-        }
-    }, [schedule])
-
-    return [isLoading, schedule]
+    return [schedule, setSchedule, loadSchedule]
 }
 
 export default UseSchedule

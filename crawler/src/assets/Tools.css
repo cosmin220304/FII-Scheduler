@@ -28,23 +28,10 @@ button:hover {
     background-color: #999898;
 }
 
-.legend {
+.selectables {
     display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
-}
-
-.red-square,
-.blue-square {
-    width: 1rem;
-    height: 1rem;
-}
-
-.red-square {
-    background-color: rgb(250, 153, 153);
-}
-
-.blue-square {
-    background-color: rgb(153, 219, 250);
 }
 
 .select {
@@ -64,6 +51,41 @@ button:hover {
     height: 100%;
     width: 20rem;
     align-self: center;
+}
+
+.toolCourseGroup {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0.75rem;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.toolCourseGroup span {
+    font-size: 0.75rem;
+    font-style: italic;
+}
+
+.toolCourse {
+    white-space: nowrap;
+    width: 15%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 0.25rem;
+    border-radius: 5px;
+    background-color: white;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+.selected {
+    box-shadow: 0 0 8px 0 rgb(0, 153, 255);
 }
 
 @media screen and (max-width: 1000px) {
