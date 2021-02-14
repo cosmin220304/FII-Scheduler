@@ -5,7 +5,7 @@ const scraper = require('table-scraper');
 const server = express();
 
 server.use(bodyParser.json());
-server.use(express.static(path.join(__dirname, 'Crawler', 'build')));
+server.use(express.static(path.join(__dirname, 'crawler', 'build')));
 
 
 server.get('/groups', async (req, res) => {
@@ -68,7 +68,7 @@ server.post('/courses', async (req, res) => {
 
 
 server.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, 'crawler', 'build', 'index.html'));
 });
 
 const port = process.env.PORT || 8000;
