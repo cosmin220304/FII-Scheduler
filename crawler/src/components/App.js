@@ -52,7 +52,7 @@ const App = () => {
       }
       setSchedule(newSchedule)
     }
-  }, [courses])
+  }, [courses, schedule])
 
 
   return (
