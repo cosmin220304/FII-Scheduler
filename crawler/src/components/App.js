@@ -13,55 +13,69 @@ const App = () => {
   const [schedule, setSchedule, loadSchedule] = UseSchedule()
   const [courses, setCourses] = useState()
 
-  const loadCourses = async () => {
-    const { data: courseMap } = await axios.post(
-      '/courses', {
-      group: selectedGroup
-    })
+  useEffect(() => {
+    const newSelectedGroup = JSON.parse(localStorage.getItem("selectedGroup"))
+    setSelectedGroup(newSelectedGroup)
+  }, [])
 
-    let newCourses = {}
-    for (let course in courseMap)
-    {
-      let courseList = courseMap[course].map(c => ({name:c, selected: true}))
-      newCourses[course] = courseList
+  useEffect(() => {
+    const init = async () => {
+      if (!selectedGroup) return;
+
+      loadSchedule(selectedGroup)
+      const { data: courseMap } = await axios.post(
+        '/courses', {
+        group: selectedGroup
+      })
+
+      let newCourses = {}
+      let savedCourses = JSON.parse(localStorage.getItem("course")) || []
+
+      for (let course in courseMap) {
+        newCourses[course] = courseMap[course].map(c => ({ name: c, selected: savedCourses.includes(c) }))
+      }
+
+      setCourses(newCourses)
     }
-    setCourses(newCourses)
+    init()
+  }, [selectedGroup])
+
+  const updateSchedule = () => {
+    let courseList = []
+    for (let course in courses) {
+      const newCourseListItems = courses[course].filter(c => c.selected).map(c => c.name)
+      courseList = [...courseList, ...newCourseListItems]
+    }
+
+    const newSchedule = { ...schedule }
+    for (let day of Object.keys(newSchedule)) {
+      for (let course of newSchedule[day]) {
+        course['Selected'] = courseList.includes(course['Disciplina'])
+      }
+    }
+
+    setSchedule(newSchedule)
   }
 
   useEffect(() => {
-    if (selectedGroup) {
-      loadSchedule(selectedGroup)
-      loadCourses()
-    }
-  }, [selectedGroup])
-
-  useEffect(() => {
-    if (courses && schedule) {
-      let courseList = []
-      for (let course in courses)
-      {
-        const newCourseListItems = courses[course].filter(c=>c.selected).map(c=>c.name)
-        courseList = [...courseList, ...newCourseListItems]
-      }
-
-      const newSchedule = {...schedule}
-      for(let day of Object.keys(newSchedule)) {
-        for (let course of newSchedule[day]) {
-          course['Selected'] = courseList.includes(course['Disciplina'])
-        }
-      }
-      setSchedule(newSchedule)
-    }
+    if (!courses || !schedule) return;
+    updateSchedule()
   }, [courses])
 
+  useEffect(() => {
+    console.log(schedule)
+    if (!schedule) {
+      updateSchedule()
+    }
+  }, [schedule])
 
   return (
     <div className='app'>
-      <h1>Organizator</h1>
+      <h1>FII Organizator</h1>
       <div className='tools'>
         <SelectGroup selectedGroup={selectedGroup} setSelectedGroup={setSelectedGroup} />
         <Selectables courses={courses} setCourses={setCourses} />
-        <Buttons />
+        <Buttons courses={courses} selectedGroup={selectedGroup} />
       </div>
       <h1>{selectedGroup}</h1>
       <ScheduleView schedule={schedule} />

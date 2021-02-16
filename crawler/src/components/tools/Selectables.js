@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { Switch } from 'pretty-checkbox-react'
-import CoursesGroup from './ToolCoursesGroup'
+import ToolCoursesGroup from './ToolCoursesGroup'
 import '@djthoms/pretty-checkbox'
 
 const Selectables = ({ courses, setCourses }) => {
@@ -14,30 +14,33 @@ const Selectables = ({ courses, setCourses }) => {
 
     return (
         <div className="selectables">
-            <Switch
-                shape="fill"
-                color="danger"
-                onChange={(e) => setShowSeminars(e.target.checked)}
-                checked={showSeminars}
-            >
-                = seminare
-            </Switch>
+            <h2>Alege materiile care te intereseaza:</h2>
+            <div>
+                <Switch
+                    shape="fill"
+                    color="danger"
+                    onChange={(e) => setShowSeminars(e.target.checked)}
+                    checked={showSeminars}
+                >
+                    = seminare
+                </Switch>
 
-            <Switch
-                shape="fill"
-                color="info"
-                onChange={(e) => setShowSCourses(e.target.checked)}
-                checked={showCourses}
-            >
-                = cursuri
-            </Switch>
+                <Switch
+                    shape="fill"
+                    color="info"
+                    onChange={(e) => setShowSCourses(e.target.checked)}
+                    checked={showCourses}
+                >
+                    = cursuri
+                </Switch>
+            </div>
 
-            <div>(sunt puse prost pe site &gt;)</div>
             {Object.keys(courses).map((name) =>
                 <div key={uuidv4()}>
-                    <CoursesGroup name={name} courses={courses[name]} setCourses={setCourses}/>
+                    <ToolCoursesGroup name={name} courses={courses[name]} setCourses={setCourses} />
                 </div>
             )}
+
         </div>
     )
 }

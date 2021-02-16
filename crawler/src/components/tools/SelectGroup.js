@@ -9,12 +9,6 @@ const SelectGroup = ({ setSelectedGroup, selectedGroup }) => {
         loadGroups()
     }, [])
 
-    useEffect(() => {
-        if (groupSeletList) {
-            setSelectedGroup(groupSeletList[0].value)
-        }
-    }, [setSelectedGroup, groupSeletList])
-
     const loadGroups = async () => {
         const { data } = await axios.get('/groups')
         let newGroupSeletList = [{ value: '', label: '' }]
@@ -33,15 +27,17 @@ const SelectGroup = ({ setSelectedGroup, selectedGroup }) => {
     }
 
     return (
-        <Select
-            placeholder='Cauta o grupa'
-            className='select'
-            value={selectedGroup}
-            onChange={onChangeGroup}
-            options={groupSeletList}
-            autoFocus
-            isSearchable
-        />
+        <div className='selectGroup'>
+            <h2>Alege grupa:</h2>
+            <Select
+                placeholder='Cauta o grupa'
+                value={selectedGroup}
+                onChange={onChangeGroup}
+                options={groupSeletList}
+                autoFocus
+                isSearchable
+            />
+        </div>
     )
 }
 
